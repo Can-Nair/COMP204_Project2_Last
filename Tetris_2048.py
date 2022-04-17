@@ -174,7 +174,7 @@ class Game:
                 if grid.tile_matrix[a][b] != None :
                     if grid.tile_matrix[a + 1][b] != None and grid.tile_matrix[a][b].num == grid.tile_matrix[a + 1][b].num:
                         # multiply the two tiles
-                        grid.tile_matrix[a][b].num = grid.tile_matrix[a + 1][b].num  * grid.tile_matrix[a][b].num
+                        grid.tile_matrix[a][b].num = 2  * grid.tile_matrix[a][b].num
                         # add the num of the tile that dissapeared to the score
                         grid.score += grid.tile_matrix[a+1][b].num
                         #delete the tile
@@ -247,16 +247,15 @@ class Game:
                     # most recently been left-clicked
                     mouse_x, mouse_y = stddraw.mouseX(), stddraw.mouseY()
                     # Closes the menu end continue to game
-                    if mouse_x >= button_x and mouse_x <= button_x + button_w:
-                        if mouse_y >= button_y and mouse_y <= button_y + button_h:
-                            self.is_paused = False
-                            break
+                    if mouse_y >= button_y and mouse_y <= button_y + button_h and mouse_x >= button_x and mouse_x <= button_x + button_w:
+                        self.is_paused = False
+                        break
                         # Restarts the game
-                        elif mouse_y >= button_y and mouse_y <= button_y + button_h:
-                            self.is_paused = False
-                            grid.score = 0
-                            self.restart = True
-                            break
+                    elif mouse_y >= button_y - button_h - button_h/2 and mouse_y <= button_y - button_h/2 and mouse_x >= button_x and mouse_x <= button_x + button_w:
+                        self.is_paused = False
+                        grid.score = 0
+                        self.restart = True
+                        break
 
         # if the game is finished show the restart menu
         elif self.is_finished:
